@@ -1,7 +1,7 @@
 {
-  "name": "SILENT-SOBX-MD",
+  "name": "ANGEL MD",
   "description": "SOBIA MD IS THE MAKE BY USING BAILEY'S",
-  "logo": "https://files.catbox.moe/m1rf91.jpg",
+  "logo": "https://files.catbox.moe/otfl6o.jpg",
   "keywords": ["bot"],
   "success_url": "/",
 
@@ -16,7 +16,7 @@
     "ALIVE_IMG": {
       "description": "paste your image url if you don't have you can use this public url.",
       "required": true,
-      "value": "https://files.catbox.moe/m1rf91.jpg"
+      "value": "https://files.catbox.moe/otfl6o.jpg"
     }, 
     
     "ALIVE_MSG": {
@@ -95,7 +95,7 @@
     "BOT_NAME": {
       "description": "write hear your name.",
       "required": true,
-      "value": "SOBIA MD"
+      "value": "ANGEL MD"
     }
 
 },
