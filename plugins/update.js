@@ -12,7 +12,7 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, reply }) => {
     try {
-        const repoUrl = 'https://github.com/Sobxsparl/SOBIA-MD.git'; // لینک مخزن گیت‌هاب
+        const repoUrl = 'https://github.com/mr-anuhas/ANGEL-MD-V1.git'; // لینک مخزن گیت‌هاب
         const targetFolder = 'plugins'; // پوشه‌ای که باید به‌روز شود
 
         // بررسی وجود پوشه هدف
