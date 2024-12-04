@@ -109,7 +109,7 @@ let up = `*╭──────────────●●►*
 *╭⊱✫ SOBIA MD ✫⊱╮*
 *│✫➠ - 📂REPOSITORY NAME:* *ANGEL MD*
 *│✫➠ - 📃DESCRIPTION:* *SRI LANKA BEST BOT*
-*│✫➠ - 🛡️OWNER:* *SOBIA BUTT*
+*│✫➠ - 🛡️OWNER:* *𝐌𝐑 𝐀𝐍𝐔𝐇𝐀𝐒*
 *│✫➠ - 🌐URL:* *https://github.com/mr-anuhas/ANGEL-MD-V1.git*
 
 *YOUR BOT ACTIVE NOW ENJOY♥️🪄*\n\n*PREFIX: ${prefix}*
