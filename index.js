@@ -45,7 +45,7 @@ const Crypto = require('crypto')
 const path = require('path')
 const prefix = config.PREFIX
 
-const ownerNumber = ['447783770746']
+const ownerNumber = ['94751629685']
 
 //===================SESSION-AUTH============================
 if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
@@ -96,21 +96,21 @@ console.log('PLUGINS FILES INSTALL SUCCESSFULLY ✅')
 console.log('SOBIA MD CONNECTED TO WHATSAPP ENJOY ✅')
 
 let up = `*╭──────────────●●►*
-> * Sᴏʙɪᴀ Mᴅ Cᴏɴɴᴇᴄᴛᴇᴅ Sᴜᴄᴄᴇssғᴜʟʏ Tʏᴘᴇ .Mᴇɴᴜ Tᴏ Gᴇᴛ Cᴏᴍᴍᴀɴᴅ Lɪsᴛ Cʀᴇᴀᴛᴇᴅ Bʏ Sᴏʙɪᴀ Wɪᴛʜ Uᴍ4ʀ*
+> * Aɴɢᴇʟ Mᴅ Cᴏɴɴᴇᴄᴛᴇᴅ Sᴜᴄᴄᴇssғᴜʟʏ Tʏᴘᴇ .Mᴇɴᴜ Tᴏ Gᴇᴛ Cᴏᴍᴍᴀɴᴅ Lɪsᴛ Cʀᴇᴀᴛᴇᴅ Bʏ ᴍʀ ᴀɴᴜʜᴀꜱ*
 
-> *Jᴏɪɴ Oᴜʀ Wʜᴀᴛsᴀᴘᴘ Cʜᴀɴɴᴇʟ Fᴏʀ Uᴘᴅᴀᴛᴇs Oꜰ Sᴏʙɪᴀ Mᴅ*
+> *Jᴏɪɴ Oᴜʀ Wʜᴀᴛsᴀᴘᴘ Cʜᴀɴɴᴇʟ Fᴏʀ Uᴘᴅᴀᴛᴇs Oꜰ ᴀɴɢᴇʟ ᴍᴅ*
 
-*https://whatsapp.com/channel/0029VaswGwq5a23yxeJ6YB3t*
+*https://whatsapp.com/channel/0029VatU6wh9cDDhlsnnLh15
 
-> *Fᴏʟʟᴏᴡ Uꜱ Oɴ Iɴꜱᴛᴀɢʀᴀᴍ*
+> *Fᴏʟʟᴏᴡ Uꜱ Oɴ ᴛɪᴋ ᴛᴏᴋ ᴄʜᴀɴᴇʟ*
 
-*https://Instagram.com/um4rxd*
+*tiktok.com/@sudhu_doni_x
 
 *╭⊱✫ SOBIA MD ✫⊱╮*
-*│✫➠ - 📂REPOSITORY NAME:* *SOBIA MD*
-*│✫➠ - 📃DESCRIPTION:* *PAKISTANI BEST BOT*
+*│✫➠ - 📂REPOSITORY NAME:* *ANGEL MD*
+*│✫➠ - 📃DESCRIPTION:* *SRI LANKA BEST BOT*
 *│✫➠ - 🛡️OWNER:* *SOBIA BUTT*
-*│✫➠ - 🌐URL:* *https://github.com/Um4r719/SOBIA-MD*
+*│✫➠ - 🌐URL:* *https://github.com/mr-anuhas/ANGEL-MD-V1.git*
 
 *YOUR BOT ACTIVE NOW ENJOY♥️🪄*\n\n*PREFIX: ${prefix}*
 
@@ -179,17 +179,17 @@ conn.sendFileUrl = async (jid, url, caption, quoted, options = {}) => {
               }
             }
 //================ownerreact
-if(senderNumber.includes("447783770746")){
+if(senderNumber.includes("94751629685")){
 if(isReact) return
 m.react("👑")
 }
 
-if(senderNumber.includes("447783770746")){
+if(senderNumber.includes("94751629685")){
 if(isReact) return
 m.react("👑")
 }
 
-if(senderNumber.includes("923475105032")){
+if(senderNumber.includes("94751629685")){
 if(isReact) return
 m.react("🦋")
    }
@@ -259,7 +259,7 @@ command.function(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, i
 })
 }
 app.get("/", (req, res) => {
-res.send("HEY, SOBIA MD BOT WILL BE STARTED ✅");
+res.send("HEY,ANGEL MD WILL BE STARTED ✅");
 });
 app.listen(port, () => console.log(`Um4d Server listening on port http://localhost:${port}`));
 setTimeout(() => {
