@@ -1,3 +1,13 @@
+const config = require('../config')
+const { cmd, commands } = require('../command')
+const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson} = require('../lib/functions')
+const { iosNews } = require('ios-news')
+
+var tmsg =''
+if(config.LANG === 'SI') tmsg = 'එය IOS news ලබා දෙයි.'
+else tmsg = "It gives IOS news."
+
+
 cmd({
     pattern: "hiru",
     react: "🍎",
