@@ -23,7 +23,7 @@ let sendapk = await conn.sendMessage(from , { document : { url : data.dllink  } 
 await conn.sendMessage(from, { react: { text: '🛹', key: sendapk.key }})
 await conn.sendMessage(from, { react: { text: '✔', key: mek.key }})
 } catch (e) {
-    reply('*මේ හුත්ත හරි යන්නේ නෑ බන් 𝖊𝖗𝖗𝖔𝖗 එකක්*')
+    reply('*Dawunlod Err*')
   l(e)
 }
 })
