@@ -3,7 +3,7 @@
 <br>
 
 <img align="center" height="auto"
-src="https://files.catbox.moe/otfl6o.jpg"/>/a>
+src="https://files.catbox.moe/otfl6o.jpg"/>
 
 <br>
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
