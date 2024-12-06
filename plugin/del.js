@@ -1,10 +1,9 @@
 const config = require('../config')
 const { cmd, commands } = require('../command')
-
 cmd({
-pattern: "delete",
+pattern: "del",
 react: "❌",
-alias: ["del"],
+alias: [","],
 desc: "delete message",
 category: "group",
 use: '.del',
@@ -23,6 +22,6 @@ const key = {
         await conn.sendMessage(m.chat, { delete: key })
 } catch(e) {
 console.log(e);
-reply('successful..👨‍💻✅')
+reply('Error!!')
 } 
 })
