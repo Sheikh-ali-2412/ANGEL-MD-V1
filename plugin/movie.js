@@ -1,182 +1,141 @@
-const { cmd } = require('../command');
-const config = require('../config');
-const { fetchJson, sleep } = require('../lib/functions');
-const prabathApi = "6467ad0b29"; // api key
-const api = "https://prabath-md-api.up.railway.app/api/"; // base api link
+const { SinhalaSub } = require('@sl-code-lords/movie-api');
+const { cmd, commands } = require('../command');
+const { PixaldrainDL } = require("pixaldrain-sinhalasub");
+const path = require('path');
+const fs = require('fs');
 
-
+// Command to search for a movie or TV show
 cmd({
-    pattern: "cmv",
-    desc: "movie",
-    category: "download",
+    pattern: "movie",
+    desc: "Search for a movie",
+    category: "movie",
+    react: "🔍",
+    filename: __filename
+},
+async (conn, mek, m, { from, q, reply }) => {
+    try {
+        const input = q.trim();
+        if (!input) return reply("Please provide a movie or TV show name to search.");
+        
+        const result = await SinhalaSub.get_list.by_search(input);
+        if (!result.status || result.results.length === 0) return reply("No results found.");
+
+        let message = "*Search Results:*\n\n";
+        result.results.forEach((item, index) => {
+            message += `${index + 1}. ${item.title}\nType: ${item.type}\nLink: ${item.link}\n\n`;
+        });
+        await conn.sendMessage(from, { text: message }, { quoted: mek });
+    } catch (e) {
+        console.log(e);
+        await conn.sendMessage(from, { react: { text: '❌', key: mek.key } });
+        return reply(`Error: ${e.message}`);
+    }
+});
+
+// Command to get movie details and download links without buttons
+cmd({
+    pattern: "slsub",
+    desc: "Get movie download links.",
+    category: "movie",
+    react: "🍿",
+    filename: __filename
+},
+async (conn, mek, m, { from, q, reply }) => {
+    try {
+        const link = q.trim();
+        
+        const result = await SinhalaSub.movie(link);
+        if (!result.status) return reply("Movie details not found.");
+
+        const movie = result.result;
+        let msg = `*${movie.title}*\n\n`;
+        msg += `Release Date: ${movie.release_date}\n`;
+        msg += `Country: ${movie.country}\n\n`;
+        msg += `Duration: ${movie.duration}\n\n`;
+        msg += `Genres: ${movie.genres}\n\n`;
+        msg += `IMDb Rating: ${movie.IMDb_Rating}\n`;
+        msg += `Director: ${movie.director.name}\n\n`;
+        msg += `Select The Number For Download Movie\n\n`;
+        msg += "Available formats:\n 1. 𝗦𝗗 𝟰𝟴𝟬\n 2. 𝗛𝗗 𝟳𝟮𝟬\n 3. 𝗙𝗛𝗗 𝟭𝟬𝟴𝟬\n\n";
+        msg += "Use `.mv <Quality Number> <movie_link>` to download.\n\n";
+        msg += `> DIZER`;
+
+         const imageUrl = movie.images && movie.images.length > 0 ? movie.images[0] : null;
+
+        await conn.sendMessage(from, {image: {url: imageUrl},caption: msg }, { quoted: mek });
+    } catch (e) {
+        console.log(e);
+        reply('*Error !!*');
+    }
+});
+
+// Command to handle downloading the movie in specified format without buttons
+cmd({
+    pattern: "mv",
     react: "🎬",
+    dontAddCommandList: true,
     filename: __filename
-}, async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+},
+async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!q || !q.startsWith("https://cine")) {
-            return reply("Please provide the link of the movie.");
-        }
+        const [format, url] = q.split(' ');
+        const result = await SinhalaSub.movie(url);
+        const movie = result.result;
 
-        function input(put, from) {
-            let [movie, quality = "480p", jid] = put.split(/\s*\|\s*/);
-
-            if (!movie) {
-                return reply("Please provide a movie name.\n\nExample: cinesub avatar | 480p | ");
-            }
-
-            const validQualities = ["360p", "480p", "720p", "1080p", "360", "480", "720", "1080"];
-            if (!validQualities.includes(quality.toLowerCase())) {
-                return reply(`Invalid quality provided.\n\nUse: .cinesub avatar | 360p | 2715171516151658@g.us`);
-            }
-
-            if (!jid || (!jid.endsWith("@s.whatsapp.net") && !jid.endsWith("@g.us"))) {
-                jid = from;
-            }
-
-            return { movie, quality, jid };
-        }
-
-        let link;
-        const info = input(q, from);
-
-        if (info.movie.startsWith("https://cine")) {
-            link = info.movie;
+        let quality;
+        if (format === '1') {
+            quality = "SD 480p";
+        } else if (format === '2') {
+            quality = "HD 720p";
+        } else if (format === '3') {
+            quality = "FHD 1080p";
         } else {
-            let ddd = await fetchJson(`${api}cinesearch?q=${info.movie}&apikey=${prabathApi}`);
-            link = ddd.data.data[0].link;
+            return reply("Invalid format. Please choose from 1, 2, or 3.");
         }
 
-        let desc = await fetchJson(`${api}cinemovie?url=${link}&apikey=${prabathApi}`);
-
-        let movieTitle = desc.data.mainDetails.maintitle;
-        let releaseDate = desc.data.mainDetails.dateCreated;
-        let directorName = desc.data.moviedata.director;
-        let country = desc.data.mainDetails.country;
-        let duration = desc.data.mainDetails.runtime;
-        let imdbRating = desc.data.moviedata.imdbRating;
-        let qualities = desc.data.dllinks.directDownloadLinks.map(link => `> ${link.quality} (${link.size})`).join("\n");
-
-        let template = `*☘️ ${movieTitle}*\n\n> 📆 *Released* : ${releaseDate}\n> 🎬 *Director* : ${directorName}\n> 🪩 *Country* : ${country}\n> 📻 *Subtitles* : Sinhala HC\n> ⏰ *Duration* : ${duration}\n> 🌟 *Rating* : ${imdbRating}\n\n ANGEL MD`;
-
-        await conn.sendMessage(info.jid, { image: { url: desc.data.mainDetails.imageUrl }, caption: template });
-
-        function parseSize(sizeStr) {
-            let sizeMatch = sizeStr.match(/^([\d.]+)\s*GB$/);
-            return sizeMatch ? parseFloat(sizeMatch[1]) : 0;
+        const directLink = await PixaldrainDL(url, quality, "direct");
+        if (directLink) {
+            await conn.sendMessage(from, {
+                document: { url: directLink },
+                mimetype: 'video/mp4',
+                fileName: `${movie.title}.mp4`,
+                caption: "> DIZER"
+            }, { quoted: mek });
+        } else {
+            reply(`Could not find the ${format}p download link. Please check the URL or try a different movie.`);
         }
-
-        function findLinkByInputQuality(inputQuality) {
-            let jsonQuality = info.quality;
-
-            if (!jsonQuality) {
-                return reply(`❗️ *No data available for quality:* ${inputQuality}`);
-            }
-
-            let linkData = desc.data.dllinks.directDownloadLinks.find(link => link.quality.includes(jsonQuality));
-
-            if (linkData) {
-                if (parseSize(linkData.size) > 2) {
-                    return reply("*❗️ Max size 2GB, cannot send via WhatsApp 😢*( ");
-                } else {
-                    return linkData;
-                }
-            } else {
-                return reply(`*❗️ No link found for the quality: ${inputQuality}*`);
-            }
-        }
-
-        let inputQuality = info.quality;
-        let result = findLinkByInputQuality(inputQuality);
-
-        let down = await fetchJson(`${api}cinedownload?url=${result.link}&apikey=${prabathApi}`);
-
-        let senddoc = await conn.sendMessage(info.jid, { document: { url: down.data.direct }, mimetype: down.data.mimeType, fileName: down.data.fileName, caption: "ANGEL" });
-        return await conn.sendMessage(info.jid, { react: { text: '🎬', key: senddoc.key } });
-
     } catch (e) {
-        console.log(e);
+        console.error(e);
+        reply(`❌ Error: ${e.message} ❌`);
     }
 });
 
-//movie search
+// Command to get recently added movies without buttons
 cmd({
-    pattern: "cs",
-    desc: "search movies",
-    category: "search",
-    react: "🔎",
+    pattern: "searchmovies",
+    alias: ["smv"],
+    desc: "Get recently added movies.",
+    category: "movie",
+    react: "🆕",
     filename: __filename
-}, async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+},
+async (conn, mek, m, { from, reply }) => {
     try {
-        if (!q) {
-            return reply("Please provide the name of the movie");
-        }
+        const page = 1;
+        const result = await SinhalaSub.get_list.by_recent_movies(page);
+        if (!result.status || result.results.length === 0) return reply("No recent movies found.");
 
-        let data = await fetchJson(`${api}cinesearch?q=${q}&apikey=${prabathApi}`);
-        const allMovies = data.data.data.map((app, index) => {
-            return `\`${index + 1}\`\n🎬 *${app.title}*\n🔗 ${app.link}\n\n`;
+        let message = "*Recently Added Movies:*\n\n";
+        result.results.forEach((item, index) => {
+            message += `${index + 1}. ${item.title}\nLink: ${item.link}\n\n`;
         });
 
-        const message = `\`[ 🎬 CINESUBZ MOVIE DATABASE 🎬 ]\`\n\n` + allMovies.join('');
-        return await conn.sendMessage(from, { text: message }, { quoted: mek });
+        message += "> DIZER";
 
+        await conn.sendMessage(from, { text: message }, { quoted: mek });
     } catch (e) {
         console.log(e);
-    }
-});
-
-cmd({
-    pattern: "cs2",
-    desc: "search movies",
-    category: "search",
-    react: "🔎",
-    filename: __filename
-}, async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
-    try {
-        if (!q) {
-            return reply("Please provide the name of the movie");
-        }
-
-        let data = await fetchJson(`${api}cinesearch?q=${q}&apikey=${prabathApi}`);
-        const allMovies = data.data.data.map((app, index) => {
-            return `\`${index + 1}\`\n🎬 *${app.title}*\n🔗 ${app.link}\n📅 *Uploaded on:* ${app.uploadedDate || 'N/A'}\n📝 *Type:* ${app.type || 'N/A'}\n⭐ *Rating:* ${app.rating || 'N/A'}\n📅 *Year:* ${app.year || 'N/A'}\n📄 *Description:* ${app.description || 'No description'}\n\n`;
-        });
-
-        const message = `\`[ 🎬 CINESUBZ MOVIE DATABASE 🎬 ]\`\n\n` + allMovies.join('');
-        return await conn.sendMessage(from, { text: message }, { quoted: mek });
-
-    } catch (e) {
-        console.log(e);
-        return reply("Sorry, there was an error fetching movie data.");
-    }
-});
-
-cmd({
-    pattern: "cs3",
-    desc: "search movies",
-    category: "search",
-    react: "🔎",
-    filename: __filename
-}, async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
-    try {
-        if (!q) {
-            return reply("Please provide the name of the movie");
-        }
-
-        // Search for the movie
-        let data = await fetchJson(`${api}cinesearch?q=${q}&apikey=${prabathApi}`);
-        const allMovies = await Promise.all(data.data.data.map(async (app, index) => {
-            // Fetch movie details (including qualities)
-            let desc = await fetchJson(`${api}cinemovie?url=${app.link}&apikey=${prabathApi}`);
-            let qualities = desc.data.dllinks.directDownloadLinks.map(link => `> ${link.quality} (${link.size})`).join("\n");
-
-            return `\`${index + 1}\`\n🎬 *${app.title}*\n🔗 ${app.link}\n📅 *Uploaded on:* ${app.uploadedDate || 'N/A'}\n📝 *Type:* ${app.type || 'N/A'}\n⭐ *Rating:* ${app.rating || 'N/A'}\n📅 *Year:* ${app.year || 'N/A'}\n🎞 *Qualities:*\n${qualities}\n\n`;
-        }));
-
-        const message = `\`[ 🎬 CINESUBZ MOVIE DATABASE 🎬 ]\`\n\n` + allMovies.join('');
-        return await conn.sendMessage(from, { text: message }, { quoted: mek });
-
-    } catch (e) {
-        console.log(e);
-        return reply("Sorry, there was an error fetching movie data.");
+        await conn.sendMessage(from, { react: { text: '❌', key: mek.key } });
+        return reply(`Error: ${e.message}`);
     }
 });
