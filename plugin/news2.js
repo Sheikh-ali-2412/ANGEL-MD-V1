@@ -1,111 +1,44 @@
-const config = require('../config')
-const { cmd } = require('../command')
-const axios = require('axios')
-const { fetchJson } = require('../lib/functions')
+const config = require('../config');
+const { cmd } = require('../command');
+const axios = require('axios');
 
-const apilink = 'https://dark-yasiya-news-apis.vercel.app/api' // API LINK ( DO NOT CHANGE THIS!! )
-
-
-// ================================HIRU NEWS========================================
-
-cmd({
-    pattern: "hirunews",
-    alias: ["hiru","news1"],
-    react: "⭐",
-    desc: "",
-    category: "news",
-    use: '.hirunews',
-    filename: __filename
-},
-async(conn, mek, m,{from, quoted }) => {
-try{
-
-const news = await fetchJson(`${apilink}/hiru`)
-  
-const msg = `
-           ⭐ *HIRU NEWS* ⭐
-
-       
-• *Title* - ${news.result.title}
-
-• *News* - ${news.result.desc}
-
-• *Link* - ${news.result.url}`
-
-
-await conn.sendMessage( from, { image: { url: news.result.image || '' }, caption: msg }, { quoted: mek })
-} catch (e) {
-console.log(e)
-reply(e)
-}
-})
-
-// ================================SIRASA NEWS========================================
-
-cmd({
-    pattern: "sirasanews",
-    alias: ["sirasa","news2"],
-    react: "🔺",
-    desc: "",
-    category: "news",
-    use: '.sirasa',
-    filename: __filename
-},
-async(conn, mek, m,{from, quoted }) => {
-try{
-
-const news = await fetchJson(`${apilink}/sirasa`)
-  
-const msg = `
-           🔺 *SIRASA NEWS* 🔺
-
-       
-• *Title* - ${news.result.title}
-
-• *News* - ${news.result.desc}
-
-• *Link* - ${news.result.url} `
-
-
-await conn.sendMessage( from, { image: { url: news.result.image || '' }, caption: msg }, { quoted: mek })
-} catch (e) {
-console.log(e)
-reply(e)
-}
-})
-
-// ================================DERANA NEWS========================================
+// API LINK
+const apilink = 'https://dizer-adaderana-news-api.vercel.app/news'; 
 
 cmd({
     pattern: "derananews",
-    alias: ["derana","news3"],
+    alias: ["derana", "news3"],
     react: "📑",
     desc: "",
     category: "news",
     use: '.derana',
     filename: __filename
 },
-async(conn, mek, m,{from, quoted }) => {
-try{
+async (conn, mek, m, { from, quoted }) => {
+    try {
+        // Fetch news data from the API
+        const response = await axios.get(apilink);
+        const news = response.data[0]; // Access the first item of the array
 
-const news = await fetchJson(`${apilink}/derana`)
-  
-const msg = `
+        // Construct the message
+        const msg = `
            📑 *DERANA NEWS* 📑
 
-       
-• *Title* - ${news.result.title}
+• *Title* - ${news.title || 'Not available'}
+• *News* - ${news.description || 'Not available'}
+• *Date* - ${news.time || 'Not available'}
+• *Link* - ${news.new_url || 'Not available'}
 
-• *News* - ${news.result.desc}
+⚡ *Powered By ${news.powered_by || 'Unknown'}*
+        `;
 
-• *Date* - ${news.result.date}
-
-• *Link* - ${news.result.url} `
-
-
-await conn.sendMessage( from, { image: { url: news.result.image || '' }, caption: msg }, { quoted: mek })
-} catch (e) {
-console.log(e)
-reply(e)
-}
-})
+        // Send the news as a message
+        await conn.sendMessage(from, { 
+            image: { url: news.image || '' }, 
+            caption: msg 
+        }, { quoted: mek });
+    } catch (e) {
+        console.error(e);
+        reply('⚠️ දෝෂයක් සිදු විය. API එකෙන් දත්ත ලබා ගැනීමට නොහැකි විය!');
+    }
+});
