@@ -1,6 +1,6 @@
 const { cmd } = require('../command');
 const config = require('../config');
-const { fetchJson, sleep } = require('../DATABASE/functions');
+const { fetchJson, sleep } = require('../lib/functions');
 const prabathApi = "6467ad0b29"; // api key
 const api = "https://prabath-md-api.up.railway.app/api/"; // base api link
 
