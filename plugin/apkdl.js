@@ -1,24 +1,46 @@
-const config = require('../config')
-const {cmd , commands} = require('../command')
-const { fetchJson } = require('../lib/functions')
+const { cmd, commands } = require('../command');
+const scraper = require("../lib/scraper");
+const axios = require('axios');
+const fetch = require('node-fetch');
+const { fetchJson, getBuffer } = require('../lib/functions');
+const { lookup } = require('mime-types');
+const fs = require('fs');
+const path = require('path');
 
+//Apk Download
 cmd({
-    pattern: "apkdl",
-    alias: ["modapk"],
-    desc: "download apks",
+    pattern: "apk",
+    desc: "Downloads Apk",
+    use: ".apk <app_name>",
+    react: "📥",
     category: "download",
-    filename: __filename,
-    react: "🛹"
+    filename: __filename
 },
-async(conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+async (conn, mek, m, { from, quoted, body, q, reply }) => {
+    const appId = q.trim();
+    if (!appId) return reply(`Please provide an app name`);
+    
+    reply("_Downloading " + appId + "_");
+    
     try {
-        if (!q && !q.startsWith("https://")) return reply("❗αρк ησт ƒσυη∂,ѕσяяу")
-        //fetch data from api  
-        let data = await fetchJson(`${baseUrl}/api/apkdl?url=${q}`)
-        reply("*𝔻𝕆𝕎ℕ𝕃𝕆𝔸𝔻𝕀ℕ𝔾...💗*")
-        await conn.sendMessage(from, { document: { url: data.data.link_1 }, fileName: data.data.name, mimetype: data.data.file_type, caption: cap }, { quoted: mek })                                                                                                                 
+        const appInfo = await scraper.aptoideDl(appId);
+        const buff = await getBuffer(appInfo.link);
+        
+        if (!buff || !appInfo.appname) {
+            return await conn.sendMessage(from, { react: { text: '❌', key: mek.key } });
+        }
+        
+        await conn.sendMessage(
+            from,
+            { document: buff, caption: `> botage nama `, mimetype: "application/vnd.android.package-archive", filename: `${appInfo.appname}.apk` },
+            { quoted: mek }
+        );
+        
+        await conn.sendMessage(from, { react: { text: '✅', key: mek.key } });
+        reply("_Download Success_");
     } catch (e) {
-        console.log(e)
-        reply(`*Cant Find ⚠️*`)
+        console.log(e);
+        await conn.sendMessage(from, { react: { text: '❌', key: mek.key } });
+        reply(`Error: ${e.message}`);
     }
-})
+});
