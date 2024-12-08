@@ -9,7 +9,7 @@ const path = require('path');
 
 //Apk Download
 cmd({
-    pattern: "apk",
+    pattern: "apk2",
     desc: "Downloads Apk",
     use: ".apk <app_name>",
     react: "📥",
