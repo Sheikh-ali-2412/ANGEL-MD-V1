@@ -29,6 +29,7 @@
     "punycode.js": "2.3.1", 
     "ruhend-scraper" : "8.0.3",
     "buffer" : "6.0.3",
+    "mrnima-moviedl":"1.0.0",
     "android-versions": "2.0.0",
     "javascript-obfuscator": "^4.1.1",
     "node-os-utils": "^1.3.7",
