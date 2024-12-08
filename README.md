@@ -23,7 +23,7 @@ src="https://files.catbox.moe/otfl6o.jpg"/>
 
 ### <br> `ANGEL MD SESSION`
 <p align="left">
-<a href="[[[https://sobia-md-pair.onrender.com/pair](https://pair-qr-web-e6537429f210.herokuapp.com/)](https://pair-qr-web-e6537429f210.herokuapp.com/)](https://pair-qr-web-e6537429f210.herokuapp.com/)"><img height= "35" title="Author" src="https://img.shields.io/badge/Session-black?style=for-the-badge&logo=render"></a>
+<a href="[[[https://sobia-md-pair.onrender.com/pair](https://pair-qr-web-e6537429f210.herokuapp.com/)](https://pair-qr-web-e653742"><img height= "35" title="Author" src="https://img.shields.io/badge/Session-black?style=for-the-badge&logo=render"></a>
 <p/>
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
