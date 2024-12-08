@@ -29,7 +29,7 @@ src="https://files.catbox.moe/otfl6o.jpg"/>
 
 ### <br> `HEROKU DEPLOYMENT`
 <p align="left">
-<a href="https://dashboard.heroku.com/new-app?template=https://github.com/Sobxsparl/SOBIA-MD"><img height= "35" title="Author" src="https://img.shields.io/badge/Deploy-purple?style=for-the-badge&logo=heroku"></a>
+<a href="https://dashboard.heroku.com/new-app?template=https://github.com/mr-anuhas/ANGEL-MD-V1"><img height= "35" title="Author" src="https://img.shields.io/badge/Deploy-purple?style=for-the-badge&logo=heroku"></a>
 <p/>
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
