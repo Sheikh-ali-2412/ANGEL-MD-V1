@@ -154,11 +154,11 @@ let madeMenu = `❁ ════ ❃•◯•❃ ════ ❁
 
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-> *https://github.com/Sobxsparl/SOBIA-MD*
+> *https://github.com/mr-anuhas/ANGEL-MD-V1.git*
 
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-> *ᴘᴏᴡᴇʀᴇᴅ ʙʏ Uᴍ4ʀ*
+> *ANGEL MD*
 
 ╰━❁ ═══ ❃•⇆•❃ ═══ ❁━╯
 `
