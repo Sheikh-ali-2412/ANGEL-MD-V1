@@ -20,7 +20,7 @@ const messages = {
 };
 
 cmd({
-    pattern: "save",
+    pattern: "sav",
     react: "📁",
     alias: ["store"],
     desc: "Save and send back a media file (image, video, or audio).",
