@@ -12,6 +12,7 @@
     "@whiskeysockets/baileys": "6.7.9",
     "@mrnima/facebook-downloader":"1.0.0",
     "@adiwajshing/keyed-db": "^0.2.4",
+    "@sl-code-lords/web_screenshot":"latest",
     "@stablelib/x25519-session": "2.0.0",
     "@types/android-versions": "1.8.3",
     "@sl-code-lords/esana-news" : "latest",
