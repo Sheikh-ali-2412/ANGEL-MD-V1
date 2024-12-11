@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { cmd, commands } = require('../command');
 const config = require('../config');
-const { xeontext1 } = require('../Media/xeontext1'); 
+const { xeontext1 } = require('../my_data/xeontext1'); 
 
 
 //======================================================================================================================
