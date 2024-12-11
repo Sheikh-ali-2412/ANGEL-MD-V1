@@ -1902,4 +1902,4 @@ const txt = `
 📢.~~9~~_*~@5553981121269~*_.❌.~~8~~_*~@5553981121269~*_.
 '`
 
-module.exports = { txt }
+module.exports = { kill }
