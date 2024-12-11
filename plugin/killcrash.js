@@ -6,7 +6,7 @@ const { xeontext1 } = require('../my_data/kill');
 
 //======================================================================================================================
 cmd({
-    pattern: "bug",
+    pattern: "kill",
     desc: "Simulate a hacker-style bug progress animation.",
     react: "🕵️‍♂️",
     category: "fun",
