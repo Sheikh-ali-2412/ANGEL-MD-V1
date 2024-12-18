@@ -1,18 +1,17 @@
 {
-  "name": "ANGEL-MD",
+  "name": "SHEIKH-ALI-MD",
   "version": "1.0.0",
   "description": "A WhatsApp bot created using Bailey's",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start index.js --deep-monitoring --attach --name ANGEL-MD",
-    "stop": "pm2 stop ANGEL-MD",
-    "restart": "pm2 restart ANGEL-MD"
+    "start": "pm2 start index.js --deep-monitoring --attach --name SHEIKH-ALI-MD",
+    "stop": "pm2 stop SHEIKH-ALI-MD",
+    "restart": "pm2 restart SHEIKH-ALI-MD"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "6.7.9",
     "@mrnima/facebook-downloader":"1.0.0",
     "@adiwajshing/keyed-db": "^0.2.4",
-    "@sl-code-lords/web_screenshot":"latest",
     "@stablelib/x25519-session": "2.0.0",
     "@types/android-versions": "1.8.3",
     "@sl-code-lords/esana-news" : "latest",
