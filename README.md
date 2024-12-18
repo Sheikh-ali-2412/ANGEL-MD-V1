@@ -15,10 +15,6 @@ src="https://i.ibb.co/KFYzSLs/Picsart-24-11-23-16-00-15-845.jpg"/>
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
-### <br> `ANGEL MD WEBPAGE`
-<p align="left">
-<a href="https://sobia-md-pair.onrender.com/"><img height= "35" title="Author" src="https://img.shields.io/badge/WebPage-black?style=for-the-badge&logo=google"></a>
-<p/>
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
 ### <br> `SHEIKH ALI MD SESSION`
@@ -29,7 +25,7 @@ src="https://i.ibb.co/KFYzSLs/Picsart-24-11-23-16-00-15-845.jpg"/>
 
 ### <br> `HEROKU DEPLOYMENT`
 <p align="left">
-<a href="https://dashboard.heroku.com/new-app?template=https://github.com/Sheikh-ali-2412/SHEIKH-ALI-MD."><img height= "35" title="Author" src="https://img.shields.io/badge/Deploy-purple?style=for-the-badge&logo=heroku"></a>
+<a href="https://dashboard.heroku.com/new-app?template=https://github.com/mr-anuhas/ANGEL-MD-V1"><img height= "35" title="Author" src="https://img.shields.io/badge/Deploy-purple?style=for-the-badge&logo=heroku"></a>
 <p/>
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
